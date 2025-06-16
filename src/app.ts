@@ -1,31 +1,13 @@
 import express, { Application, Request, Response } from 'express';
 import { model, Schema } from 'mongoose';
+import { Note } from './app/models/notes.model';
+import { notesRoutes } from './app/controllers/notes.controllers';
 
 const app: Application = express();
 
-const noteSchema = new Schema({
-    title: String,
-    content: String,
-    // publishDate: Number
-})
+app.use(express.json())
 
-const Note = model("Note", noteSchema)
-
-app.post('/create-note', async (req: Request, res: Response) => {
-    const myNote = new Note({
-        title: "Learning Mongoose",
-        content: "I am learning Mongoose",
-        // publishDate: 10081994
-    })
-
-    await myNote.save()
-
-    res.status(201).json({
-        success: true,
-        message: "Note created successfully",
-        note: myNote
-    })
-})
+app.use("/notes", notesRoutes)
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to Note App');
@@ -33,3 +15,8 @@ app.get('/', (req: Request, res: Response) => {
 
 
 export default app;
+
+
+// mvc -- > model, controller 
+
+
