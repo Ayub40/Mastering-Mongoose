@@ -1,0 +1,6 @@
+1. app.ts ---> "app.use("/users", usersRoutes);"
+2. interfaces ---> user.interfaces.ts
+3. models ---> user.model.ts
+4. controller ---> user.controller.ts
+
+
