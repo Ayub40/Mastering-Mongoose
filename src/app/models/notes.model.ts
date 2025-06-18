@@ -1,5 +1,6 @@
-import { model, Schema } from "mongoose"
-import { INotes } from "../interfaces/notes.interface"
+import { model, Schema } from "mongoose";
+import { INotes } from "../interfaces/notes.interface";
+// import validator from "validator";
 
 // " Hello World " 
 const noteSchema = new Schema<INotes>(
@@ -34,6 +35,11 @@ const noteSchema = new Schema<INotes>(
                 type: String,
                 default: 'gray'
             }
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true
         }
     },
     {

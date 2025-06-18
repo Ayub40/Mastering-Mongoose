@@ -1,19 +1,71 @@
 import express, { Request, Response } from "express"
 import { User } from "../models/user.model"
+import { z } from "zod";
+import bcrypt from 'bcryptjs'
 
 export const usersRoutes = express.Router()
 
+const CreateUserZodSchema = z.object(
+    {
+        firstName: z.string(),
+        lastName: z.string(),
+        age: z.number(),
+        email: z.string(),
+        password: z.string(),
+        role: z.string().optional()
+    }
+)
+
 usersRoutes.post('/create-user', async (req: Request, res: Response) => {
 
-    const body = req.body
+    try {
+        // const zodBody = await CreateUserZodSchema.parseAsync(req.body)
+        const body = req.body
 
-    const user = await User.create(body)
+        // const password = await bcrypt.hash(body.password, 10)
+        // console.log(password);
+        // body.password = password
 
-    res.status(201).json({
-        success: true,
-        message: "User created successfuly",
-        user
-    })
+        // console.log(body, "zod body");
+
+        // const body = req.body
+
+        // const user = await User.create(body)
+
+        // =====================================================
+        // Built it and custom instance methods
+        // const user = new User(body)
+
+        // const password = await user.hashPassword(body.password)
+        // // console.log(password, "static");
+        // user.password = password
+
+        // await user.save();
+        // =====================================================
+
+        // built in and custom static methods
+
+        const password = await User.hashPassword(body.password)
+        console.log(password, "static");
+
+        body.password = password
+
+        const user = await User.create(body)
+
+        res.status(201).json({
+            success: true,
+            message: "User created successfuly",
+            user: user
+        })
+    } catch (error: any) {
+        console.log(error);
+        res.status(400).json({
+            success: false,
+            message: error.message,
+            error
+        })
+    }
+
 })
 usersRoutes.get('/', async (req: Request, res: Response) => {
     const users = await User.find()

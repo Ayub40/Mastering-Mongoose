@@ -1,9 +1,17 @@
-import { model, Schema } from "mongoose";
+import { Model, model, Schema } from "mongoose";
 import validator from "validator";
-import { IUser } from "../interfaces/user.interface";
+import { IAddress, IUser, UserInstanceMethods, UserStaticMethods } from "../interfaces/user.interface";
+import bcrypt from 'bcryptjs'
 
+const addressSchema = new Schema<IAddress>({
+    city: { type: String },
+    street: { type: String },
+    zip: { type: Number }
+}, {
+    _id: false
+})
 
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema<IUser, UserStaticMethods, UserInstanceMethods>({
     firstName: {
         type: String,
         required: [true, "firstName keno dao nai?"],
@@ -56,8 +64,28 @@ const userSchema = new Schema<IUser>({
             message: "Role is not valid. got {VALUE} role"
         },
         default: 'USER'
+    },
+    address: {
+        type: addressSchema
     }
+}, {
+    versionKey: false,
+    timestamps: true
 })
 
-export const User = model("User", userSchema)
+
+userSchema.method("hashPassword", async function (plainPassword: string) {
+    const password = await bcrypt.hash(plainPassword, 10)
+    // console.log(password);
+    return password
+})
+
+userSchema.static("hashPassword", async function (plainPassword: string) {
+    const password = await bcrypt.hash(plainPassword, 10)
+    return password
+})
+
+
+
+export const User = model<IUser, UserStaticMethods>("User", userSchema)
 
