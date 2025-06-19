@@ -3,4 +3,10 @@
 3. models ---> user.model.ts
 4. controller ---> user.controller.ts
 
-
+conceptional session video length
+40.35
+39.29
+40.39
+39.42
+40.19
+34.20

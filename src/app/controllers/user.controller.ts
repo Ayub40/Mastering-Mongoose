@@ -45,10 +45,10 @@ usersRoutes.post('/create-user', async (req: Request, res: Response) => {
 
         // built in and custom static methods
 
-        const password = await User.hashPassword(body.password)
-        console.log(password, "static");
+        // const password = await User.hashPassword(body.password)
+        // console.log(password, "static");
 
-        body.password = password
+        // body.password = password
 
         const user = await User.create(body)
 
@@ -68,7 +68,33 @@ usersRoutes.post('/create-user', async (req: Request, res: Response) => {
 
 })
 usersRoutes.get('/', async (req: Request, res: Response) => {
-    const users = await User.find()
+    // const users = await User.find()
+
+    const userEmail = req.query.email ? req.query.email : ""
+    console.log(userEmail);
+    let users = []
+
+    // Filtering
+    // if (userEmail) {
+    //     users = await User.find({ email: userEmail })
+    // } else {
+    //     users = await User.find()
+    // }
+
+    //Sorting ( 1 = mean ascending , -1 = mean descending )
+    users = await User.find().sort({ "email": "asc" })
+    // users = await User.find().sort({ "email": "ascending" })
+    // users = await User.find().sort({ "email": "desc" })
+    // users = await User.find().sort({ "email": "descending" })
+    // users = await User.find().sort({ "email": 1 })
+    // users = await User.find().sort({ "email": -1 })
+
+    // Skipping ( .skip(10) = mean 1st er 10 ta skip hobe )
+    // users = await User.find().skip(10)
+
+    //Limiting
+    // users = await User.find().limit(2)
+
 
     res.status(201).json({
         success: true,
@@ -88,8 +114,8 @@ usersRoutes.get('/:userId', async (req: Request, res: Response) => {
 })
 usersRoutes.delete('/:userId', async (req: Request, res: Response) => {
     const userId = req.params.userId
-    const user = await User.findByIdAndDelete(userId)
-
+    // const user = await User.findByIdAndDelete(userId)
+    const user = await User.findOneAndDelete({ _id: userId })
 
     res.status(201).json({
         success: true,
