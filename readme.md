@@ -122,3 +122,21 @@ src/
 ├── package.json
 ├── tsconfig.json
 └── README.md
+```
+
+---
+
+### Business Logic
+
+  * Books can only be borrowed if sufficient stock is available.
+  * Borrowing automatically deducts stock and updates the availability flag.
+  * Aggregation pipelines are used to calculate borrowed book summaries.
+
+
+### Future Enhancements
+
+  * Add user authentication for secure API access.
+  * Implement book reservation and late return penalties.
+  * Add search and filtering capabilities for books.
+
+  
