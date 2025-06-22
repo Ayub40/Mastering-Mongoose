@@ -103,6 +103,7 @@ GET /api/books?filter=FANTASYY&sortBy=title&sort=asc&limit=5
 
 ### Project Structure
 
+```bash
 src/
 ├── app/
 │   ├── controllers/
