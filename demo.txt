@@ -10,3 +10,10 @@ conceptional session video length
 39.42
 40.19
 34.20
+
+
+Assignment:
+Post: http://localhost:4000/api/books
+Get:  http://localhost:4000/api/books
+Get By Id: http://localhost:4000/api/books/6855c41832958681f5a785f7
+Update By Id: http://localhost:4000/api/books/6855bdced44719c883e42b42
