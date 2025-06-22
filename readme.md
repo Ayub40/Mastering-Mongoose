@@ -46,3 +46,78 @@ cd library-management-api
 ```bash
 npm install
 ```
+
+### 3. Create `.env` File
+
+Create a `.env` file in the root directory with the following variables:
+
+```bash
+PORT=4000
+DATABASE_URL=
+```
+
+### 4. Start the Application
+
+For development mode:
+
+```bash
+npm run dev
+```
+
+For production build:
+
+```bash
+npm run build
+```
+
+---
+
+## API Endpoints
+
+### Books API
+
+| Method | Endpoint             | Description                             |
+| ------ | ----------------     | --------------------------------------- |
+| POST   | `/api/books`         | Create new book                         |
+| GET    | `/api/books`         | Get all books                           |
+| GET    | `/api/books/:bookId` | Get book by ID                          |
+| PATCH  | `/api/books/:bookId` | Update book                             |
+| DELETE | `/api/books/:bookId` | Delete book                             |
+
+#### Query Example:
+
+```bash
+GET /api/books?filter=FANTASYY&sortBy=title&sort=asc&limit=5
+```
+
+---
+
+### Borrow API
+
+| Method | Endpoint      | Description                                        |
+| ------ | ------------- | -------------------------------------------------- |
+| POST   | `/api/borrow` | Borrow a book                                      |
+| GET    | `/api/borrow` | View borrowed books summary                        |
+
+---
+
+### Project Structure
+
+src/
+├── app/
+│   ├── controllers/
+│   │   ├── book.controller.ts
+│   │   ├── borrow.controller.ts
+│   ├── interfaces/ 
+│   │   ├── book.interface.ts
+│   │   ├── borrowBook.interface.ts
+│   ├── models/
+│   │   ├── book.model.ts
+│   │   ├── borrowBook.model.ts
+│  
+│── app.ts
+│── server.ts
+├── .env
+├── package.json
+├── tsconfig.json
+└── README.md
