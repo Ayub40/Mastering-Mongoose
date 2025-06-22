@@ -1,58 +1,48 @@
 # Library Management System API
 
-A RESTful API for managing books and borrowing operations, ensuring robust validations and dynamic inventory control.
-
----
-
-## Overview
-
-This Library Management API provides CRUD operations for managing books and borrow records, ensuring proper business logic and seamless functionality for library operations.
+A RESTful API for managing a library system, built using **Express.js**, **TypeScript**, **Mongoose**, and **MongoDB**.
 
 ---
 
 ## Features
 
-- **Books Management**: Add, update, delete, and retrieve book records with filtering and sorting options.
-- **Borrow Functionality**: Borrow books with stock management and dynamic availability updates.
-- **Summary Reports**: View borrowed books summary with total quantities.
-- **Error Handling**: Robust validation for all inputs and consistent error responses.
+- **Books Management**:
+  - CRUD operations for books.
+  - Automatic stock and availability updates.
+  - Validation for genres, ISBN uniqueness, and stock levels.
+
+- **Borrowing Management**:
+  - Borrow books with dynamic stock deduction.
+  - Availability status auto-updates based on stock.
+
+- **Summary Reports**:
+  - View borrowed books with total quantities using aggregation pipelines.
+
+- **Error Handling**:
+  - Comprehensive error responses for validation and system errors.
 
 ---
 
 ## Tech Stack
 
-- Backend: Node.js with Express.js
-- Language: TypeScript
-- Database: MongoDB with Mongoose
-- Tools: Postman (for API testing)
+- **Backend**: Node.js with Express.js
+- **Language**: TypeScript
+- **Database**: MongoDB with Mongoose ODM
+- **API Testing**: Postman
 
 ---
 
-## API Endpoints
+## Getting Started
 
-### Books API
+### 1. Clone the Repository
 
-| Method | Endpoint         | Description                |
-|--------|-------------------|----------------------------|
-| POST   | `/api/books`     | Add a new book             |
-| GET    | `/api/books`     | Retrieve books (filterable)|
-| GET    | `/api/books/:id` | Get book details by ID     |
-| PUT    | `/api/books/:id` | Update book information    |
-| DELETE | `/api/books/:id` | Delete a book              |
+```bash
+git clone https://github.com/your-username/library-management-api
+cd library-management-api
+```
 
-### Borrow API
+ ### 2. Install Dependencies
 
-| Method | Endpoint      | Description                               |
-|--------|---------------|-------------------------------------------|
-| POST   | `/api/borrow` | Borrow books with quantity validation     |
-| GET    | `/api/borrow` | View borrowed books summary               |
-
----
-
-## Setup Instructions
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/library-management-api
-   cd library-management-api
-
+```bash
+npm install
+```
